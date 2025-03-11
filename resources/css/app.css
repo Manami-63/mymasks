@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.likedIconStyle:hover {
+    animation: heartBeat 1s infinite;
+    fill: #F9D1D1;
+    color: red;
+    opacity: 1;
+    transition: opacity 500ms;
+}
