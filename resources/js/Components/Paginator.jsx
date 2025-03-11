@@ -14,11 +14,11 @@ const Paginator = ({items, itemsPerPage, passCurrentItems}) => {
     }
 
     useEffect(() => {
-        const test = () => {
+        const updateItemsList = () => {
             passCurrentItems(currentItems)
         }
-        test()
-    }, [itemOffset])
+        updateItemsList()
+    }, [itemOffset, items])
 
     return (
         <div className="mt-4 flex justify-between items-center">

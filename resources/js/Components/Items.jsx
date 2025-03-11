@@ -13,13 +13,19 @@ const Items = ({order, sort}) => {
 
     useEffect(() => {
         const fetchItems = async () => {
+
             let itemOrder = ''
+            let filteringCategories = ''
 
             if (order !== null) {
                 itemOrder = '?orderBy=' + order
             }
 
-            const apiUrl = '/api/items' + itemOrder
+            if (sort.length) {
+                filteringCategories = '&sortBy=' + sort.toString()
+            }
+
+            const apiUrl = '/api/items' + itemOrder + filteringCategories
             try {
                 const res = await axios.get(apiUrl)
 
@@ -31,7 +37,7 @@ const Items = ({order, sort}) => {
             }
         }
         fetchItems()
-    }, [])
+    }, [order, sort])
 
     const updateCurrentItems = (receivedItems) => {
         setCurrentItems(receivedItems)

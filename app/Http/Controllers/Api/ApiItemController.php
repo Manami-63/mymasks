@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
+use App\Models\ItemCategory;
 use App\Models\UserLike;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -36,6 +37,14 @@ class ApiItemController extends Controller
             }
         } else {
             $query->orderBy('id', 'desc');
+        }
+
+        if ($request->has('sortBy')) {
+            $categoryIdsArray = explode(',', $request->input('sortBy'));
+
+            $query->whereHas('itemCategories', function ($query) use ($categoryIdsArray) {
+                $query->whereIn('category_id', $categoryIdsArray);
+            }, '=', count($categoryIdsArray))->get();
         }
 
         if ($request->has('limit')) {

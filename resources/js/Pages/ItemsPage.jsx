@@ -35,41 +35,44 @@ const ItemsPage = ({orderBy, sortBy}) => {
         getCategories()
     }, []);
 
-    const toggleCategory = (category) => {
+    const toggleCategory = (categoryId) => {
         setSelectedCategories((prev) =>
-            prev.includes(category)
-                ? prev.filter((c) => c !== category)  // Remove if already exists
-                : [...prev, category]                // Add if not exists
+            prev.includes(categoryId)
+                ? prev.filter((c) => c !== categoryId)  // Remove if already exists
+                : [...prev, categoryId]                // Add if not exists
         );
     };
 
     return (
         <PageLayout>
 
-            <Head title="Dashboard"/>
+            <Head title="My Masks"/>
 
             <div className="my-8">
                 <div className='flex gap-4 flex-wrap'>
                     {categories.length > 0 && categories.map((category) => (
-                        <button key={category.id} onClick={() => toggleCategory(category)}
-                             className={"px-4 font-bold capitalize text-sm rounded-lg" + (selectedCategories.includes(category) ? ' bg-mm-dark-brown text-mm-cream' : ' bg-mm-pink ')}>
+                        <button key={category.id} onClick={() => toggleCategory(category.id)}
+                             className={"px-4 font-bold capitalize text-sm rounded-lg" + (selectedCategories.includes(category.id) ? ' bg-mm-dark-brown text-mm-cream' : ' bg-mm-pink ')}>
                             {category.name}
                         </button>
                     ))}
                 </div>
                 <div className=' mt-4 flex gap-4 flex-wrap'>
                     {showingItemsOptions.map((option) => (
-                        <Link href={route('items', {orderBy: option})} key={option}
+                        <button key={option} onClick={() => setSelectedShowingItemsOption(option)}
                               className={"px-4 font-bold capitalize text-sm rounded-lg" + (selectedShowingItemsOption === option ? ' bg-mm-dark-brown text-mm-cream' : ' bg-mm-pink ')}>
                             {option} items
-                        </Link>
+                        </button>
                     ))}
                 </div>
 
-                <Items order={orderBy} sort={sortBy}/>
+                <Items order={selectedShowingItemsOption} sort={selectedCategories}/>
             </div>
         </PageLayout>
     )
 }
 
 export default ItemsPage
+
+
+// todo add clear filter

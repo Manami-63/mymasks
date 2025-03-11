@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use function Termwind\render;
 
 class Item extends Model
 {
@@ -32,5 +33,10 @@ class Item extends Model
     public function userLikes(): HasMany
     {
         return $this->hasMany(UserLike::class);
+    }
+
+    public function itemCategories(): HasMany
+    {
+        return $this->hasMany(ItemCategory::class);
     }
 }
