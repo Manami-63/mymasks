@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpMultipleClassDeclarationsInspection */
 
 use App\Http\Controllers\Api\ApiCategoryController;
 use App\Http\Controllers\Api\ApiItemController;

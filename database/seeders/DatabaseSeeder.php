@@ -1,4 +1,5 @@
 <?php
+/** @noinspection PhpUndefinedMethodInspection */
 
 namespace Database\Seeders;
 
@@ -6,13 +7,10 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemCategory;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use App\Models\UserLike;
 use App\Services\UserLikesService;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -50,7 +48,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $adminUser = User::factory()->create([
+        User::factory()->create([
             'is_admin' => true,
         ]);
 

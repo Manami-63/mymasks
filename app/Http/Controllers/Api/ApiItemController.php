@@ -1,13 +1,12 @@
 <?php
+/** @noinspection PhpUndefinedMethodInspection */
 /** @noinspection PhpUndefinedVariableInspection */
-
 /** @noinspection PhpMultipleClassDeclarationsInspection */
 
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
-use App\Models\ItemCategory;
 use App\Models\UserLike;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -62,7 +61,7 @@ class ApiItemController extends Controller
         return response()->json($response);
     }
 
-    public function show(Request $request, string $id): JsonResponse
+    public function show(string $id): JsonResponse
     {
         $item = Item::query()->with('brand')->findOrFail($id);
 

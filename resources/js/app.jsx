@@ -1,3 +1,5 @@
+// noinspection JSIgnoredPromiseFromCall
+
 import '../css/app.css';
 import './bootstrap';
 

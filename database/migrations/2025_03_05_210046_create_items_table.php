@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('details')->nullable();
             $table->string('product_number')->nullable();
             $table->string('image')->nullable();
-            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('price')->default(0);
             $table->unsignedTinyInteger('sheet_per_packet')->default(0);
             $table->unsignedSmallInteger('stock')->default(1);
             $table->unsignedSmallInteger('num_likes')->default(0)->index();
