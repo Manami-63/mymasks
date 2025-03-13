@@ -23,7 +23,7 @@ const Paginator = ({items, itemsPerPage, passCurrentItems}) => {
     return (
         <div className="mt-4 flex justify-between items-center">
             <div className="italic text-sm">
-                Showing from {itemOffset} to {endOffset} items (Total {items.length} items)
+                Showing from {itemOffset + 1} to {endOffset >= items.length ? items.length : endOffset} items (Total {items.length} items)
             </div>
             <ReactPaginate
                 pageCount={pageCount}
@@ -36,6 +36,7 @@ const Paginator = ({items, itemsPerPage, passCurrentItems}) => {
                 renderOnZeroPageCount={null}
                 containerClassName="flex gap-4"
                 activeClassName='active font-bold text-mm-brown'
+                disabledClassName='disabled opacity-30'
             />
         </div>
     )

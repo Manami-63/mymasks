@@ -39,8 +39,8 @@ class ApiItemController extends Controller
             $query->orderBy('id', 'desc');
         }
 
-        if ($request->has('sortBy')) {
-            $categoryIdsArray = explode(',', $request->input('sortBy'));
+        if ($request->has('category')) {
+            $categoryIdsArray = explode(',', $request->input('category'));
 
             $query->whereHas('itemCategories', function ($query) use ($categoryIdsArray) {
                 $query->whereIn('category_id', $categoryIdsArray);

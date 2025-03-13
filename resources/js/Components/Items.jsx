@@ -7,7 +7,7 @@ import Paginator from "@/Components/Paginator.jsx";
 const Items = ({order, sort}) => {
 
     const [items, setItems] = useState([])
-    const [currentItems, setCurrentItems] = useState([])
+    const [currentItems, setCurrentItems] = useState()
     const [loading, setLoading] = useState(true)
     let itemsPerPage = 12
 
@@ -17,12 +17,12 @@ const Items = ({order, sort}) => {
             let itemOrder = ''
             let filteringCategories = ''
 
-            if (order !== null) {
+            if (order) {
                 itemOrder = '?orderBy=' + order
             }
 
-            if (sort.length) {
-                filteringCategories = '&sortBy=' + sort.toString()
+            if (sort) {
+                filteringCategories = '&category=' + sort
             }
 
             const apiUrl = '/api/items' + itemOrder + filteringCategories
@@ -37,7 +37,7 @@ const Items = ({order, sort}) => {
             }
         }
         fetchItems()
-    }, [order, sort])
+    }, [])
 
     const updateCurrentItems = (receivedItems) => {
         setCurrentItems(receivedItems)

@@ -21,7 +21,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="pt-16">
-                    <ListItems isTop="true" title="popular items" order="popular"/>
+                    <ListItems isTop="true" title="popular items" order="popularity"/>
                     <Link href={route('items', {orderBy: 'popular'})} className="mt-2 flex justify-end items-center">
                         <div className="font-bold">
                             view more popular items

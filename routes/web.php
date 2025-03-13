@@ -3,6 +3,7 @@
 /** @noinspection PhpMultipleClassDeclarationsInspection */
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +23,10 @@ Route::get('/', function () {
 
 Route::get('/items', function (Request $request) {
     $orderBy = $request->query('orderBy');
-    $sortBy = $request->query('sortBy');
+    $categories = Category::all();
+    $category = $request->query('category');
 
-    return Inertia::render('ItemsPage', ['orderBy' => $orderBy, 'sortBy' => $sortBy]);
+    return Inertia::render('ItemsPage', ['orderBy' => $orderBy, 'category' => $category, 'categories' => $categories,]);
 })->name('items');
 
 Route::get('/item/{id}', function ($id) {
