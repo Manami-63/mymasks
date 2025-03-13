@@ -100,12 +100,21 @@ const ItemDetails = ({itemId}) => {
                         )}
                     </div>
                     <div>
+                        {item.item_categories?.length &&
+                            <div className='flex gap-2 flex-wrap'>
+                                {item.item_categories.map((itemCategory) => (
+                                    <div key={itemCategory.id}
+                                            className="font-bold capitalize text-sm">
+                                        #{itemCategory.category.name}
+                                    </div>
+                                ))}
+                            </div>}
                         <div className="flex justify-between items-center">
                             <div className="font-bold text-2xl truncate">
                                 {item.name}
                             </div>
 
-                            {user ? (
+                            {user && (
                                 isLiked ? (
                                     <FiHeart onClick={() => onHeartClick()}
                                              className="text-red-500 fill-red-500 bg-red cursor-pointer w-8 h-8"/>
@@ -113,8 +122,6 @@ const ItemDetails = ({itemId}) => {
                                     <FiHeart onClick={() => onHeartClick()}
                                              className="likedIconStyle text-mm-dark-brown opacity-30 cursor-pointer w-8 h-8"/>
                                 )
-                            ) : (
-                                <></>
                             )}
 
                         </div>

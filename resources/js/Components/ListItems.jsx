@@ -5,11 +5,6 @@ import Item from "@/Components/Item.jsx";
 import axios from "axios";
 
 const ListItems = ({isTop = false, title = null, order = null}) => {
-    let hasTitle = false
-
-    if (title) {
-        hasTitle = true
-    }
 
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
@@ -42,7 +37,7 @@ const ListItems = ({isTop = false, title = null, order = null}) => {
 
     return (
         <div>
-            {hasTitle &&
+            {title &&
                 <div className="flex">
                     <div className="flex justify-items-start">
                         <LiaStarSolid className='text-yellow-400 text-base mb-4'/>

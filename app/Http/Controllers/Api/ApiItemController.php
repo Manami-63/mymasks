@@ -63,7 +63,7 @@ class ApiItemController extends Controller
 
     public function show(string $id): JsonResponse
     {
-        $item = Item::query()->with('brand')->findOrFail($id);
+        $item = Item::query()->with(['brand', 'itemCategories.category'])->findOrFail($id);
 
         $response = [
             'item' => $item

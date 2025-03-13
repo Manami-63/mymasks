@@ -25,11 +25,6 @@ class Item extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
     public function userLikes(): HasMany
     {
         return $this->hasMany(UserLike::class);

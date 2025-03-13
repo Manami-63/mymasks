@@ -17,7 +17,7 @@ export default function Welcome() {
                 </div>
 
                 <div className="pt-16">
-                    <ListItems isTop="true" title="new items" order="date"/>
+                    <ListItems isTop="true" title="new items" order="new"/>
                     <Link href={route('items', {orderBy: 'new'})} className="mt-2 flex justify-end items-center">
                         <div className="font-bold">
                             view more new items
