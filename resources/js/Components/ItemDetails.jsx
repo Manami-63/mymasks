@@ -6,6 +6,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {usePage} from "@inertiajs/react";
 import Spinner from "@/Components/Spinner.jsx";
+import {useReward} from "react-rewards";
+import {Tooltip} from 'react-tooltip'
 
 const ItemDetails = ({itemId}) => {
 
@@ -17,30 +19,32 @@ const ItemDetails = ({itemId}) => {
     const [quantity, setQuantity] = useState(0)
     const [userLike, setUserLike] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
+    const {reward} = useReward('rewardId', 'confetti', {'elementCount': 10, startVelocity: 15})
 
     useEffect(() => {
-        const fetchItem = async () => {
-
-            const apiUrlToGetItem = `/api/items/${itemId}`;
-            try {
-                const res = await axios.get(apiUrlToGetItem)
-                setItem(res.data.item)
-            } catch (error) {
-                console.log('Error fetching item data', error)
-            }
-
-            if (user) {
-                const apiUrlToGetUserLike = `/api/user-likes?itemId=${itemId}`;
-                try {
-                    const res = await axios.get(apiUrlToGetUserLike)
-                    setUserLike(res.data.userLike)
-                } catch (error) {
-                    console.log('Error getting like data', error)
-                }
-            }
-        }
         fetchItem()
     }, [itemId])
+
+    const fetchItem = async () => {
+
+        const apiUrlToGetItem = `/api/items/${itemId}`;
+        try {
+            const res = await axios.get(apiUrlToGetItem)
+            setItem(res.data.item)
+        } catch (error) {
+            console.log('Error fetching item data', error)
+        }
+
+        if (user) {
+            const apiUrlToGetUserLike = `/api/user-likes?itemId=${itemId}`;
+            try {
+                const res = await axios.get(apiUrlToGetUserLike)
+                setUserLike(res.data.userLike)
+            } catch (error) {
+                console.log('Error getting like data', error)
+            }
+        }
+    }
 
     useEffect(() => {
         if (item) {
@@ -80,8 +84,26 @@ const ItemDetails = ({itemId}) => {
         }
     }
 
+    const addToCart = async () => {
+        const apiUrl = `/api/cart-items`
+        try {
+            const res = await axios.post(apiUrl, {'itemId': itemId, 'quantity': quantity})
+            if (res.data.responseCode === 200) {
+                cartAdded()
+            }
+        } catch (error) {
+            console.log('Error saving cart item data', error)
+        }
+    }
+
+    const cartAdded = () => {
+        reward()
+        fetchItem()
+        setCartCount((prev) => prev + 1);
+    }
+
     return (
-        <div>
+        <>
             {loading ? (
                 <Spinner loading={loading}/>
             ) : (
@@ -104,7 +126,7 @@ const ItemDetails = ({itemId}) => {
                             <div className='flex gap-2 flex-wrap'>
                                 {item.item_categories.map((itemCategory) => (
                                     <div key={itemCategory.id}
-                                            className="font-bold capitalize text-sm">
+                                         className="font-bold capitalize text-sm">
                                         #{itemCategory.category.name}
                                     </div>
                                 ))}
@@ -137,14 +159,14 @@ const ItemDetails = ({itemId}) => {
                             {item.details}
                         </div>
                         <div className="pt-8">
-                            <div className={"font-bold"}>
+                            <div className="font-bold">
                                 ${item.price} / {item.sheet_per_packet} {item.sheet_per_packet > 1 ? ('sheets') : ('sheet')}
                             </div>
-                            <div className={"text-sm"}>
+                            <div className="text-sm">
                                 ${(item.price / item.sheet_per_packet).toFixed(2)} per sheet
                             </div>
                             <div className="text-sm">
-                                {item.stock} available
+                                {item.stock - item.itemsInCart} available
                             </div>
                         </div>
                         <div className="pt-16">
@@ -155,7 +177,7 @@ const ItemDetails = ({itemId}) => {
                                 </div>
                                 <input
                                     type='number'
-                                    max={item.stock}
+                                    max={item.stock - item.itemsInCart}
                                     min={0}
                                     id='quantity'
                                     name='quantity'
@@ -163,17 +185,42 @@ const ItemDetails = ({itemId}) => {
                                     required
                                     value={quantity}
                                     onChange={(e) => setQuantity(e.target.value)}
+                                    disabled={!user}
                                 />
                             </div>
                             <div className="pt-2">
-                                {item.stock <= 0 ? (
+                                {(item.stock - item.itemsInCart) <= 0 && (
                                     <SecondaryButton className="" disabled={item.stock <= 0}>
                                         Sold out
                                     </SecondaryButton>
+                                )}
+
+                                {!user ? (
+                                    <>
+                                        <a className="my-anchor-element">
+                                            <PrimaryButton
+                                                className='cursor-not-allowed'
+                                                disabled>
+                                                Add to cart
+                                            </PrimaryButton>
+                                        </a>
+                                        <Tooltip anchorSelect=".my-anchor-element" place="top"
+                                                 style={{ backgroundColor: "#F9D1D1", color: "#5C3D22", fontSize: "80%", borderRadius: '5px' }}>
+                                            Log in or Sign up please!
+                                        </Tooltip>
+                                    </>
                                 ) : (
-                                    <PrimaryButton className="" disabled={quantity <= 0 || quantity > item.stock}>
-                                        Add to cart
-                                    </PrimaryButton>
+                                    <>
+                                        <PrimaryButton
+                                            className={((quantity <= 0 || quantity > (item.stock - item.itemsInCart)) && 'cursor-not-allowed')}
+                                            onClick={() => {
+                                                addToCart()
+                                            }}
+                                        >
+                                            Add to cart
+                                        </PrimaryButton>
+                                        <span id="rewardId"/>
+                                    </>
                                 )}
                             </div>
                         </div>
@@ -181,7 +228,7 @@ const ItemDetails = ({itemId}) => {
                 </div>
             )
             }
-        </div>
+        </>
     )
 }
 

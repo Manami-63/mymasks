@@ -2,10 +2,11 @@ import {Head, Link} from '@inertiajs/react';
 import ListItems from "@/Components/ListItems.jsx";
 import PageLayout from "@/Layouts/PageLayout.jsx";
 import {FaArrowRight} from "react-icons/fa";
+import ItemsPage from "@/Pages/ItemsPage.jsx";
 
 export default function Welcome() {
     return (
-        <PageLayout>
+        <>
 
             <Head title="Welcome"/>
 
@@ -36,6 +37,11 @@ export default function Welcome() {
                     </Link>
                 </div>
             </div>
-        </PageLayout>
+        </>
     );
 }
+
+Welcome.layout = (page) => {
+    return <PageLayout children={page} />
+}
+

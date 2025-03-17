@@ -34,4 +34,9 @@ class Item extends Model
     {
         return $this->hasMany(ItemCategory::class);
     }
+
+    public function cartItems(): HasMany
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

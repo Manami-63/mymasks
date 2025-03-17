@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\CartItem;
+use App\Models\UserCart;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -29,12 +31,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return [
-            ...parent::share($request),
+        return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
+                'user_has_cart' => $request->user() ? UserCart::where('user_id', $request->user()->id)->exists() : false,
             ],
             'csrf_token' => csrf_token(),
-        ];
+        ]);
     }
 }

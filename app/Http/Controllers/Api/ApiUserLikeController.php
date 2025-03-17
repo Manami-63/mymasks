@@ -25,7 +25,8 @@ class ApiUserLikeController extends Controller
         }
 
         $response = [
-            'userLike' => $userLike
+            'userLike' => $userLike,
+            'responseCode' => 200
         ];
 
         return response()->json($response);
@@ -49,7 +50,8 @@ class ApiUserLikeController extends Controller
         }
 
         $response = [
-            'userLike' => $userLike
+            'userLike' => $userLike,
+            'responseCode' => 200
         ];
 
         return response()->json($response);

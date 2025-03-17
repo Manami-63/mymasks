@@ -5,13 +5,16 @@ import ItemDetails from "@/Components/ItemDetails.jsx";
 const ItemPage = ({itemId, itemName}) => {
 
     return (
-        <PageLayout>
-
+        <>
             <Head title={itemName}/>
 
             <ItemDetails itemId={itemId} />
-        </PageLayout>
+        </>
     )
+}
+
+ItemPage.layout = (page) => {
+    return <PageLayout children={page} />
 }
 
 export default ItemPage

@@ -45,11 +45,11 @@ const ItemsPage = ({orderBy, category, categories}) => {
     };
 
     return (
-        <PageLayout>
+        <>
 
             <Head title="My Masks"/>
 
-            <div className="my-8">
+            <div className="mt-20">
                 <div className='flex gap-4 flex-wrap'>
                     {categories.length > 0 && categories.map((category) => (
                         <button key={category.id} onClick={() => toggleCategory(category.id)}
@@ -85,8 +85,12 @@ const ItemsPage = ({orderBy, category, categories}) => {
                 )}
 
             </div>
-        </PageLayout>
+        </>
     )
+}
+
+ItemsPage.layout = (page) => {
+    return <PageLayout children={page} />
 }
 
 export default ItemsPage

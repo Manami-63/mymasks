@@ -33,10 +33,10 @@ const Item = ({item}) => {
             <div className="text-sm truncate">
                 {item.brand.name}
             </div>
-            <div className={"font-bold text-sm text-right"}>
+            <div className="font-bold text-sm text-right">
                 ${item.price} / {item.sheet_per_packet} {item.sheet_per_packet > 1 ? ('sheets') : ('sheet')}
             </div>
-            <div className={"text-xs text-right"}>
+            <div className="text-xs text-right">
                 ${(item.price / item.sheet_per_packet).toFixed(2)} per sheet
             </div>
         </Link>

@@ -65,6 +65,10 @@ class ApiItemController extends Controller
     {
         $item = Item::query()->with(['brand', 'itemCategories.category'])->findOrFail($id);
 
+        $itemsInCart = $item->cartItems()->sum('quantity');
+
+        $item['itemsInCart'] = $itemsInCart;
+
         $response = [
             'item' => $item
         ];

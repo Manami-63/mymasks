@@ -1,8 +1,10 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 
+const withMT = require("@material-tailwind/react/utils/withMT");
+
 /** @type {import('tailwindcss').Config} */
-export default {
+export default withMT({
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
@@ -19,6 +21,7 @@ export default {
                 'mm-pink':'#F9D1D1',
                 'mm-light-pink':'#FCE8E8',
                 'mm-light-pink-opacity':'rgba(252, 232, 232, .8)',
+                'mm-white-opacity':'rgba(999, 999, 999, .9)',
                 'mm-brown':'#BD804A',
                 // 'mm-dark-brown':'#895B32',
                 'mm-dark-brown':'#5C3D22',
@@ -29,4 +32,4 @@ export default {
     },
 
     plugins: [forms],
-};
+});

@@ -3,9 +3,9 @@ import ListItems from "@/Components/ListItems.jsx";
 import PageLayout from "@/Layouts/PageLayout.jsx";
 import {FaArrowRight} from "react-icons/fa";
 
-export default function Dashboard() {
+const Dashboard = () => {
     return (
-        <PageLayout>
+        <div>
 
             <Head title="Dashboard"/>
 
@@ -46,7 +46,13 @@ export default function Dashboard() {
 
                 {/*ToDo Add comment please list*/}
             </div>
-        </PageLayout>
+        </div>
     );
 }
+
+Dashboard.layout = (page) => {
+    return <PageLayout children={page} />
+}
+
+export default Dashboard
 
