@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ApiUserLikeController extends Controller
+class ApiUserLikesController extends Controller
 {
     public function index(Request $request): JsonResponse
     {

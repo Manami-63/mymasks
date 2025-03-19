@@ -14,6 +14,23 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiCartItemsController extends Controller
 {
+    public function index(): JsonResponse
+    {
+        $userCart = UserCart::where('user_id', Auth::id())->first();
+
+        $data = null;
+
+        if ($userCart) {
+            $data = CartItem::with(['item', 'item.brand'])->where('user_cart_id', $userCart->id)->get();
+        }
+
+        $response = [
+            'cartItems' => $data
+        ];
+
+        return response()->json($response);
+    }
+
     public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 
-class ApiCategoryController extends Controller
+class ApiCategoriesController extends Controller
 {
     public function index(): JsonResponse
     {

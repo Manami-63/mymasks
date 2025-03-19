@@ -8,6 +8,7 @@ import {useState} from "react";
 import {Transition} from "@headlessui/react";
 import CategoryNav from "@/Components/CategoryNav.jsx";
 import {Badge} from "@material-tailwind/react";
+import Cart from "@/Components/Cart.jsx";
 
 export default function PageLayout({children}) {
 
@@ -113,9 +114,8 @@ export default function PageLayout({children}) {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <div className='absolute z-30 mt-2 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'
-                             onClick={() => setShowCart(false)}>
-                            <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-white-opacity'>
+                        <div className='absolute z-30 mt-2 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'>
+                            <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
                                 <Cart/>
                             </div>
                         </div>

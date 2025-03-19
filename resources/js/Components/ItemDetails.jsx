@@ -99,7 +99,6 @@ const ItemDetails = ({itemId}) => {
     const cartAdded = () => {
         reward()
         fetchItem()
-        setCartCount((prev) => prev + 1);
     }
 
     return (
