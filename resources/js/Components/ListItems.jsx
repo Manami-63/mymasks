@@ -3,8 +3,10 @@ import {useEffect, useState} from "react";
 import Spinner from "@/Components/Spinner.jsx";
 import Item from "@/Components/Item.jsx";
 import axios from "axios";
+import {FaArrowRight} from "react-icons/fa";
+import {Link} from "@inertiajs/react";
 
-const ListItems = ({isTop = false, title = null, order = null}) => {
+const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink = null}) => {
 
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
@@ -37,33 +39,51 @@ const ListItems = ({isTop = false, title = null, order = null}) => {
 
     return (
         <div>
-            {title &&
-                <div className="flex">
-                    <div className="flex justify-items-start">
-                        <LiaStarSolid className='text-yellow-400 text-base mb-4'/>
-                        <LiaStarSolid className='text-yellow-400 text-lg mb-4'/>
-                        <LiaStarSolid className='text-yellow-400 text-xl mb-4'/>
-                        <div className="uppercase text-xl font-bold px-2">
-                            {title}
-                        </div>
-                        <LiaStarSolid className='text-yellow-400 text-xl mb-4'/>
-                        <LiaStarSolid className='text-yellow-400 text-lg mb-4'/>
-                        <LiaStarSolid className='text-yellow-400 text-base mb-4'/>
-                    </div>
-                </div>
-            }
+            {loading ? (
+                <Spinner loading={loading}/>
+            ) : (
+                <div>
+                    {(items.length) > 0 && (
+                        <div>
+                            <div>
+                                {title &&
+                                    <div className="flex">
+                                        <div className="flex justify-items-start">
+                                            <LiaStarSolid className='text-yellow-400 text-base mb-4'/>
+                                            <LiaStarSolid className='text-yellow-400 text-lg mb-4'/>
+                                            <LiaStarSolid className='text-yellow-400 text-xl mb-4'/>
+                                            <div className="uppercase text-xl font-bold px-2">
+                                                {title}
+                                            </div>
+                                            <LiaStarSolid className='text-yellow-400 text-xl mb-4'/>
+                                            <LiaStarSolid className='text-yellow-400 text-lg mb-4'/>
+                                            <LiaStarSolid className='text-yellow-400 text-base mb-4'/>
+                                        </div>
+                                    </div>
+                                }
 
-            <div className="mt-4">
-                {loading ? (
-                    <Spinner loading={loading}/>
-                ) : (
-                    <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
-                        {items.map((item) => (
-                                <Item key={item.id} item={item} />
-                        ))}
-                    </div>
-                )}
-            </div>
+                                <div className="mt-4">
+                                    <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
+                                        {items.map((item) => (
+                                            <Item key={item.id} item={item}/>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {viewMoreItemsLink !== null && (
+                                <Link href={route('items', {orderBy: viewMoreItemsLink})}
+                                      className="mt-2 flex justify-end items-center">
+                                    <div className="font-bold">
+                                        view more items
+                                    </div>
+                                    <FaArrowRight className="ml-2"/>
+                                </Link>
+                            )}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     )
 }

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('order_item_feedback', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_item_id')->index();
             $table->string('name');
+            $table->text('feedback');
+            $table->unsignedTinyInteger('rating')->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('order_item_feedback');
     }
 };

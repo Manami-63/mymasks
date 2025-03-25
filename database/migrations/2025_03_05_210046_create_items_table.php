@@ -22,8 +22,8 @@ return new class extends Migration
             $table->unsignedTinyInteger('sheet_per_packet')->default(0);
             $table->unsignedSmallInteger('stock')->default(1);
             $table->unsignedSmallInteger('num_likes')->default(0)->index();
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

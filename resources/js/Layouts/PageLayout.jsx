@@ -57,6 +57,9 @@ export default function PageLayout({children}) {
                                         </Dropdown.Trigger>
 
                                         <Dropdown.Content>
+                                            <Dropdown.Link href={route('orders')}>
+                                                Orders
+                                            </Dropdown.Link>
                                             <Dropdown.Link href={route('profile.edit')}>
                                                 Profile
                                             </Dropdown.Link>

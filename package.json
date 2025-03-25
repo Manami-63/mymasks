@@ -24,6 +24,7 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "@material-tailwind/react": "^2.1.10",
+        "moment": "^2.30.1",
         "react-icons": "^5.5.0",
         "react-paginate": "^8.3.0",
         "react-rewards": "^2.1.0",

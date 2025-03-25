@@ -2,7 +2,6 @@ import {Head, Link} from '@inertiajs/react';
 import ListItems from "@/Components/ListItems.jsx";
 import PageLayout from "@/Layouts/PageLayout.jsx";
 import {FaArrowRight} from "react-icons/fa";
-import ItemsPage from "@/Pages/ItemsPage.jsx";
 
 export default function Welcome() {
     return (
@@ -18,23 +17,11 @@ export default function Welcome() {
                 </div>
 
                 <div className="pt-16">
-                    <ListItems isTop="true" title="new items" order="new"/>
-                    <Link href={route('items', {orderBy: 'new'})} className="mt-2 flex justify-end items-center">
-                        <div className="font-bold">
-                            view more new items
-                        </div>
-                        <FaArrowRight className="ml-2"/>
-                    </Link>
+                    <ListItems isTop="true" title="new items" order="new" viewMoreItemsLink="new"/>
                 </div>
 
                 <div className="pt-16">
-                    <ListItems isTop="true" title="popular items" order="popular"/>
-                    <Link href={route('items', {orderBy: 'popular'})} className="mt-2 flex justify-end items-center">
-                        <div className="font-bold">
-                            view more popular items
-                        </div>
-                        <FaArrowRight className="ml-2"/>
-                    </Link>
+                    <ListItems isTop="true" title="popular items" order="popular" viewMoreItemsLink="popular"/>
                 </div>
             </div>
         </>

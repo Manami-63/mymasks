@@ -98,7 +98,7 @@ const Cart = () => {
         const apiUrl = `/api/orders/${orderId}`
 
         try {
-            const res = await axios.put(apiUrl, {'status': 'placed'})
+            const res = await axios.put(apiUrl, {'status': 'delivered'})
             if (res.data.responseCode === 200) {
                 setSending(false)
                 setShowMessage(true)

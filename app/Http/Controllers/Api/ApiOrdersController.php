@@ -3,20 +3,33 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\OrderStatus;
 use App\Events\OrderWasCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ApiOrdersController extends Controller
 {
+    public function index(): JsonResponse
+    {
+        $data = Order::with(['orderItems.item.brand', 'orderItems.orderItemFeedback'])->where('user_id', Auth::id())->get();
+
+        $response = [
+            'orders' => $data
+        ];
+
+        return response()->json($response);
+    }
+
     public function store(): JsonResponse
     {
         $order = new Order();
         $order->user_id = Auth::id();
-        $order->status = 'creating';
+        $order->status = OrderStatus::CREATING;
         $order->save();
 
         $response = [
@@ -30,7 +43,7 @@ class ApiOrdersController extends Controller
     public function update(Request $request, int $id): JsonResponse
     {
         $validated = $request->validate([
-            'status' => 'required|string',
+            'status' => [Rule::enum(OrderStatus::class), 'required', 'string'],
         ]);
 
         $order = Order::find($id);
