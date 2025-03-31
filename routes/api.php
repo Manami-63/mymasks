@@ -4,6 +4,7 @@
 use App\Http\Controllers\Api\ApiCartItemsController;
 use App\Http\Controllers\Api\ApiCategoriesController;
 use App\Http\Controllers\Api\ApiItemsController;
+use App\Http\Controllers\Api\ApiOrderItemFeedbacksController;
 use App\Http\Controllers\Api\ApiOrdersController;
 use App\Http\Controllers\Api\ApiOrderItemsController;
 use App\Http\Controllers\Api\ApiUserLikesController;
@@ -15,6 +16,7 @@ Route::prefix('/api')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::resource('/cart-items', ApiCartItemsController::class);
+        Route::resource('/order-item-feedbacks', ApiOrderItemFeedbacksController::class);
         Route::resource('/order-items', ApiOrderItemsController::class);
         Route::resource('/orders', ApiOrdersController::class);
         Route::resource('/user-likes', ApiUserLikesController::class);

@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Events\OrderWasCreated;
 use App\Models\CartItem;
 use App\Models\UserCart;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class HandleOrderWasCreatedEvent
 {

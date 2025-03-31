@@ -126,7 +126,7 @@ export default function PageLayout({children}) {
                 </div>
             </div>
 
-            <main className="absolute top-20 w-full max-w-2xl px-6 lg:max-w-5xl">
+            <main className="absolute top-20 w-full max-w-2xl px-6 lg:max-w-5xl" id="myapp" >
                 {children}
             </main>
         </div>
