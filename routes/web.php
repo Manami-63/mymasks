@@ -35,7 +35,7 @@ Route::get('/item/{id}', function ($id) {
     if (!$item) {
         return redirect('/');
     }
-    return Inertia::render('ItemPage', ['itemId' => $id, 'itemName' => $item->name]);
+    return Inertia::render('ItemPage', ['item' => $item, 'itemName' => $item->name]);
 })->name('item');
 
 Route::get('/dashboard', function () {

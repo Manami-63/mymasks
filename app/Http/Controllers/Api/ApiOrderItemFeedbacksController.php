@@ -13,22 +13,22 @@ use Illuminate\Http\Request;
 
 class ApiOrderItemFeedbacksController extends Controller
 {
-//    public function index(): JsonResponse
-//    {
-//        $userCart = UserCart::where('user_id', Auth::id())->first();
-//
-//        $data = null;
-//
-//        if ($userCart) {
-//            $data = CartItem::with(['item', 'item.brand'])->where('user_cart_id', $userCart->id)->get();
-//        }
-//
-//        $response = [
-//            'cartItems' => $data
-//        ];
-//
-//        return response()->json($response);
-//    }
+    public function index(Request $request): JsonResponse
+    {
+        $data = [];
+
+        if ($request->has('itemId')) {
+            $orderItems = OrderItem::where('item_id', $request->input('itemId'))->pluck('id');
+
+            $data = OrderItemFeedback::query()->whereIn('order_item_id', $orderItems)->get();
+        }
+
+        $response = [
+            'feedbacks' => $data
+        ];
+
+        return response()->json($response);
+    }
 
     public function store(Request $request): JsonResponse
     {

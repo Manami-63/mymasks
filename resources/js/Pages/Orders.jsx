@@ -14,6 +14,7 @@ import TextInput from "@/Components/TextInput.jsx";
 import InputLabel from "@/Components/InputLabel.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const Orders = () => {
 
@@ -46,7 +47,7 @@ const Orders = () => {
         getOrders().then(() =>
             setLoading(false)
         )
-    }, [])
+    }, [openModal])
 
     const totalPrice = (items) => {
         if (items.length > 1) {
@@ -59,6 +60,7 @@ const Orders = () => {
     }
 
     const resetReview = () => {
+        setModalOrder([])
         setFeedbackRating(1)
         setFeedbackName('')
         setFeedbackText('')
@@ -80,9 +82,19 @@ const Orders = () => {
 
             const res = await axios.post(apiUrl, sendingData)
             if (res.data.responseCode === 200) {
-                resetReview()
 
-                setSending(false)
+                Swal.fire({
+                    title: 'Thanks!!!',
+                    text: 'Thanks for submitting your feedback!',
+                    icon: 'success',
+                    confirmButtonText: 'Back >'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        resetReview()
+                        setSending(false)
+                        setOpenModal(false)
+                    }
+                });
             }
         } catch (error) {
             console.log('Error saving cart item data', error)
