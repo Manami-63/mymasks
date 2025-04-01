@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Link, usePage} from "@inertiajs/react";
 
-const CategoryNav = () => {
+const CategoryNav = ({setShowCategories}) => {
 
     const user = usePage().props.auth.user;
     const [categories, setCategories] = useState([]);
@@ -30,6 +30,7 @@ const CategoryNav = () => {
             <div className='grid grid-cols-8 gap-8 text-sm'>
                 {categories.length > 0 && categories.map((category) => (
                     <Link href={route('items', { orderBy: 'all', category: category.id})}
+                          onClick={() => setShowCategories(false)}
                           key={category.id}
                           className="font-bold capitalize rounded-lg bg-mm-pink text-mm-dark-brown aspect-square relative">
                         <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">

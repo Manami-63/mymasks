@@ -25,7 +25,8 @@ export default function PageLayout({children}) {
                 <div className="px-6 sm:max-w-5xl mx-auto relative">
                     <div className=" grid grid-cols-3 items-center">
                         <div className="hidden sm:flex sm:items-center justify-start items-center">
-                            <button type="button" className="" onClick={() => setShowCategories(prev => !prev)}>
+                            <button type="button" className=""
+                                    onClick={() => setShowCategories(prev => !prev)}>
                                 <BiSolidCategory className="text-3xl inline-block"/>
                             </button>
                         </div>
@@ -103,7 +104,7 @@ export default function PageLayout({children}) {
                         <div className='absolute z-30 mt-2 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'
                             onClick={() => setShowCategories(false)}>
                             <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-white-opacity'>
-                                <CategoryNav/>
+                                <CategoryNav setShowCategories={setShowCategories}/>
                             </div>
                         </div>
                     </Transition>
