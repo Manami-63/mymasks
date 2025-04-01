@@ -18,15 +18,14 @@ import Swal from 'sweetalert2'
 
 const Orders = () => {
 
-    const [orders, setOrders] = useState([])
-    const [loading, setLoading] = useState(true)
     const appUrl = import.meta.env.VITE_APP_URL
-
-    const [openModal, setOpenModal] = useState(false)
-    const [modalOrder, setModalOrder] = useState([])
-    const [feedbackRating, setFeedbackRating] = useState(1)
     const [feedbackName, setFeedbackName] = useState('')
+    const [feedbackRating, setFeedbackRating] = useState(1)
     const [feedbackText, setFeedbackText] = useState('')
+    const [loading, setLoading] = useState(true)
+    const [modalOrder, setModalOrder] = useState([])
+    const [openModal, setOpenModal] = useState(false)
+    const [orders, setOrders] = useState([])
     const [sending, setSending] = useState(false)
 
 
@@ -49,22 +48,6 @@ const Orders = () => {
         )
     }, [openModal])
 
-    const totalPrice = (items) => {
-        if (items.length > 1) {
-            return items.reduce(function (a, b) {
-                return a + (b.price * b.quantity)
-            }, 0)
-        } else {
-            return items[0].price * items[0].quantity
-        }
-    }
-
-    const resetReview = () => {
-        setModalOrder([])
-        setFeedbackRating(1)
-        setFeedbackName('')
-        setFeedbackText('')
-    }
 
     const createFeedback = async () => {
         setSending(true)
@@ -100,6 +83,24 @@ const Orders = () => {
             console.log('Error saving cart item data', error)
         }
     }
+
+    const resetReview = () => {
+        setModalOrder([])
+        setFeedbackRating(1)
+        setFeedbackName('')
+        setFeedbackText('')
+    }
+
+    const totalPrice = (items) => {
+        if (items.length > 1) {
+            return items.reduce(function (a, b) {
+                return a + (b.price * b.quantity)
+            }, 0)
+        } else {
+            return items[0].price * items[0].quantity
+        }
+    }
+
 
     const modalContent = () => {
         return (
@@ -202,6 +203,7 @@ const Orders = () => {
             </div>
         )
     }
+
 
     return (
 

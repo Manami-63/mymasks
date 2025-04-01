@@ -5,8 +5,9 @@ import {LiaStarSolid} from "react-icons/lia";
 
 const ItemFeedBacks = ({item}) => {
 
-    const [loading, setLoading] = useState(true)
     const [feedbacks, setFeedbacks] = useState([])
+    const [loading, setLoading] = useState(true)
+
 
     useEffect(() => {
         const getFeedbacks = async () => {
@@ -24,6 +25,7 @@ const ItemFeedBacks = ({item}) => {
             setLoading(false)
         )
     }, [])
+
 
     return (
         <div>

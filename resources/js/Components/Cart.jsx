@@ -4,15 +4,17 @@ import {CiImageOff} from "react-icons/ci";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import Spinner from "@/Components/Spinner.jsx";
 import {useReward} from 'react-rewards';
+import {Link} from "@inertiajs/react";
 
-const Cart = () => {
+const Cart = ({setShowCart}) => {
 
+    const appUrl = import.meta.env.VITE_APP_URL
     const [cartItems, setCartItems] = useState([])
-    const [totalPrice, setTotalPrice] = useState(0)
+    const {reward} = useReward('rewardId', 'confetti')
     const [sending, setSending] = useState(false)
     const [showMessage, setShowMessage] = useState(false)
-    const appUrl = import.meta.env.VITE_APP_URL
-    const {reward} = useReward('rewardId', 'confetti')
+    const [totalPrice, setTotalPrice] = useState(0)
+
 
     useEffect(() => {
         const getCartItems = async () => {
@@ -50,9 +52,10 @@ const Cart = () => {
         }
     }, [cartItems])
 
-    const startOrdering = () => {
-        setSending(true)
-        sendOrder()
+
+    const finishUpOrdering = () => {
+        setSending(false)
+        setShowMessage(true)
     }
 
     const sendOrder = async () => {
@@ -94,19 +97,25 @@ const Cart = () => {
         }
     }
 
+    const startOrdering = () => {
+        setSending(true)
+        sendOrder()
+    }
+
     const updateOrderStatus = async (orderId) => {
         const apiUrl = `/api/orders/${orderId}`
 
         try {
             const res = await axios.put(apiUrl, {'status': 'delivered'})
             if (res.data.responseCode === 200) {
-                setSending(false)
-                setShowMessage(true)
+
+                setTimeout(
+                    finishUpOrdering, 2000
+                )
                 setTimeout(
                     reward,
-                    2000
+                    3000
                 )
-
             }
         } catch (error) {
             console.log('Error fetching order data', error)
@@ -125,6 +134,13 @@ const Cart = () => {
                         Your order has been placed! Please check your email.
                     </div>
                     <span id="rewardId"/>
+                    <div className="mt-8">
+                        <Link href={route('dashboard')} onClick={() => setShowCart(false)}>
+                            <PrimaryButton className="ms-4">
+                                Back to Dashboard
+                            </PrimaryButton>
+                        </Link>
+                    </div>
                 </div>
             ) : (
                 <div>

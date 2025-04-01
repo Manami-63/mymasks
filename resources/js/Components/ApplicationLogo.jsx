@@ -2,7 +2,6 @@ export default function ApplicationLogo(props) {
     return (
     <svg
         {...props}
-        // className="h-12 w-auto lg:h-16"
         viewBox="0 0 1453 1026"
         xmlns="http://www.w3.org/2000/svg">
         <path

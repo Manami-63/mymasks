@@ -5,11 +5,11 @@ import Item from "@/Components/Item.jsx";
 import axios from "axios";
 import {FaArrowRight} from "react-icons/fa";
 import {Link} from "@inertiajs/react";
-
 const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink = null}) => {
 
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
+
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -36,6 +36,7 @@ const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink
         }
         fetchItems()
     }, [])
+
 
     return (
         <div>

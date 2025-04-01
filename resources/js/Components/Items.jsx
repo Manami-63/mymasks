@@ -6,10 +6,11 @@ import Paginator from "@/Components/Paginator.jsx";
 
 const Items = ({order, sort}) => {
 
-    const [items, setItems] = useState([])
     const [currentItems, setCurrentItems] = useState()
-    const [loading, setLoading] = useState(true)
+    const [items, setItems] = useState([])
     let itemsPerPage = 12
+    const [loading, setLoading] = useState(true)
+
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -39,9 +40,11 @@ const Items = ({order, sort}) => {
         fetchItems()
     }, [])
 
+
     const updateCurrentItems = (receivedItems) => {
         setCurrentItems(receivedItems)
     }
+
 
     return (
         <div>

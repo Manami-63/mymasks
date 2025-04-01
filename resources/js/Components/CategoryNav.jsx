@@ -4,9 +4,10 @@ import {Link, usePage} from "@inertiajs/react";
 
 const CategoryNav = ({setShowCategories}) => {
 
-    const user = usePage().props.auth.user;
     const [categories, setCategories] = useState([]);
     const [showingItemsOptions, setShowingItemsOptions] = useState(['all', 'new', 'popular'])
+    const user = usePage().props.auth.user;
+
 
     useEffect (() => {
         const getCategories = async () => {
@@ -24,6 +25,7 @@ const CategoryNav = ({setShowCategories}) => {
             setShowingItemsOptions(['all', 'new', 'popular', 'liked', 'purchased']);
         }
     }, [])
+
 
     return (
         <div className="p-12">
@@ -43,6 +45,7 @@ const CategoryNav = ({setShowCategories}) => {
             <div className='mt-8 grid grid-cols-8 gap-8 text-sm'>
                 {showingItemsOptions.map((option) => (
                     <Link href={route('items', {orderBy: option})}
+                          onClick={() => setShowCategories(false)}
                           key={option}
                           className="font-bold capitalize rounded-lg bg-mm-pink text-mm-dark-brown aspect-square relative">
                         <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">

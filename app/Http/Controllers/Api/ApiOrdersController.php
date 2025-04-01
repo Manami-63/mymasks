@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpUndefinedMethodInspection */
+/** @noinspection PhpMultipleClassDeclarationsInspection */
 /** @noinspection PhpUndefinedFieldInspection */
 
 namespace App\Http\Controllers\Api;

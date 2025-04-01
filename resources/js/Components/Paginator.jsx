@@ -3,15 +3,11 @@ import {useEffect, useState} from "react";
 
 const Paginator = ({items, itemsPerPage, passCurrentItems}) => {
 
-    const [itemOffset, setItemOffset] = useState(0);
-    const endOffset = itemOffset + itemsPerPage;
     const currentItems = items.slice(itemOffset, endOffset);
+    const endOffset = itemOffset + itemsPerPage;
+    const [itemOffset, setItemOffset] = useState(0);
     const pageCount = Math.ceil(items.length / itemsPerPage);
 
-    const handlePageClick = (event) => {
-        const newOffset = (event.selected * itemsPerPage) % items.length;
-        setItemOffset(newOffset);
-    }
 
     useEffect(() => {
         const updateItemsList = () => {
@@ -19,6 +15,13 @@ const Paginator = ({items, itemsPerPage, passCurrentItems}) => {
         }
         updateItemsList()
     }, [itemOffset, items])
+
+
+    const handlePageClick = (event) => {
+        const newOffset = (event.selected * itemsPerPage) % items.length;
+        setItemOffset(newOffset);
+    }
+
 
     return (
         <div className="mt-4 flex justify-between items-center">

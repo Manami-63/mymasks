@@ -11,19 +11,55 @@ import {Tooltip} from 'react-tooltip'
 
 const ItemDetails = ({itemId}) => {
 
-    const [item, setItem] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const user = usePage().props.auth.user;
     const appUrl = import.meta.env.VITE_APP_URL
     const [imageUrl, setImageUrl] = useState(null)
-    const [quantity, setQuantity] = useState(0)
-    const [userLike, setUserLike] = useState(null)
     const [isLiked, setIsLiked] = useState(false)
+    const [item, setItem] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const [quantity, setQuantity] = useState(0)
     const {reward} = useReward('rewardId', 'confetti', {'elementCount': 10, startVelocity: 15})
+    const user = usePage().props.auth.user;
+    const [userLike, setUserLike] = useState(null)
+
 
     useEffect(() => {
         fetchItem()
     }, [itemId])
+
+    useEffect(() => {
+        if (item) {
+            if (item.image) {
+                setImageUrl(`${appUrl}/storage/images/${item.image}`);
+            }
+            setLoading(false)
+        }
+    }, [item]);
+
+    useEffect(() => {
+        if (userLike !== null) {
+            setIsLiked(true)
+        } else {
+            setIsLiked(false)
+        }
+    }, [userLike]);
+
+
+    const addToCart = async () => {
+        const apiUrl = `/api/cart-items`
+        try {
+            const res = await axios.post(apiUrl, {'itemId': itemId, 'quantity': quantity})
+            if (res.data.responseCode === 200) {
+                cartAdded()
+            }
+        } catch (error) {
+            console.log('Error saving cart item data', error)
+        }
+    }
+
+    const cartAdded = () => {
+        reward()
+        fetchItem()
+    }
 
     const fetchItem = async () => {
 
@@ -46,23 +82,6 @@ const ItemDetails = ({itemId}) => {
         }
     }
 
-    useEffect(() => {
-        if (item) {
-            if (item.image) {
-                setImageUrl(`${appUrl}/storage/images/${item.image}`);
-            }
-            setLoading(false)
-        }
-    }, [item]);
-
-    useEffect(() => {
-        if (userLike !== null) {
-            setIsLiked(true)
-        } else {
-            setIsLiked(false)
-        }
-    }, [userLike]);
-
     const onHeartClick = async () => {
         const apiUrl = `/api/user-likes`;
         if (isLiked) {
@@ -84,22 +103,6 @@ const ItemDetails = ({itemId}) => {
         }
     }
 
-    const addToCart = async () => {
-        const apiUrl = `/api/cart-items`
-        try {
-            const res = await axios.post(apiUrl, {'itemId': itemId, 'quantity': quantity})
-            if (res.data.responseCode === 200) {
-                cartAdded()
-            }
-        } catch (error) {
-            console.log('Error saving cart item data', error)
-        }
-    }
-
-    const cartAdded = () => {
-        reward()
-        fetchItem()
-    }
 
     return (
         <>

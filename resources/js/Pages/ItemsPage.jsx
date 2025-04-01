@@ -8,11 +8,12 @@ import Spinner from "@/Components/Spinner.jsx";
 
 const ItemsPage = ({orderBy, category, categories}) => {
 
-    const user = usePage().props.auth.user;
-    const [showingItemsOptions, setShowingItemsOptions] = useState(['all', 'new', 'popular'])
-    const [selectedShowingItemsOption, setSelectedShowingItemsOption] = useState(orderBy || 'all');
-    const [selectedCategories, setSelectedCategories] = useState([])
     const [loading, setLoading] = useState(true)
+    const [selectedCategories, setSelectedCategories] = useState([])
+    const [selectedShowingItemsOption, setSelectedShowingItemsOption] = useState(orderBy || 'all');
+    const [showingItemsOptions, setShowingItemsOptions] = useState(['all', 'new', 'popular'])
+    const user = usePage().props.auth.user;
+
 
     useEffect(() => {
         if (user) {
@@ -31,6 +32,7 @@ const ItemsPage = ({orderBy, category, categories}) => {
         setLoading(false)
     }, [user]);
 
+
     const toggleCategory = (categoryId) => {
         const updatedCategories = selectedCategories.includes(categoryId)
             ? selectedCategories.filter((c) => c !== categoryId)
@@ -43,6 +45,7 @@ const ItemsPage = ({orderBy, category, categories}) => {
             preserveScroll: true,
         });
     };
+
 
     return (
         <>

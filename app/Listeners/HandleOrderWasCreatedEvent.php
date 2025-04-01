@@ -1,4 +1,6 @@
-<?php /** @noinspection PhpUndefinedMethodInspection */
+<?php
+/** @noinspection PhpUndefinedFieldInspection */
+/** @noinspection PhpUndefinedMethodInspection */
 
 namespace App\Listeners;
 

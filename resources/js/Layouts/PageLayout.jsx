@@ -12,10 +12,11 @@ import Cart from "@/Components/Cart.jsx";
 
 export default function PageLayout({children}) {
 
-    const user = usePage().props.auth.user;
-    const [showCategories, setShowCategories] = useState(false)
     const [showCart, setShowCart] = useState(false)
+    const [showCategories, setShowCategories] = useState(false)
+    const user = usePage().props.auth.user;
     const userHasCart = usePage().props.auth.user_has_cart
+
 
     return (
 
@@ -26,9 +27,9 @@ export default function PageLayout({children}) {
                     <div className=" grid grid-cols-3 items-center">
                         <div className="hidden sm:flex sm:items-center justify-start items-center">
                             <button type="button" className=""
-                                    onClick={() => setShowCategories(prev => !prev)}>
-                                <BiSolidCategory className="text-3xl inline-block"/>
-                            </button>
+                                    onClick={() => [setShowCategories(prev => !prev), setShowCart(false)]}>
+                                    <BiSolidCategory className="text-3xl inline-block"/>
+                                </button>
                         </div>
                         <div className="flex justify-center">
                             <Link href={route('top')}>
@@ -36,23 +37,31 @@ export default function PageLayout({children}) {
                             </Link>
                         </div>
                         <div className="hidden sm:ms-6 sm:flex sm:items-center justify-end items-center">
-                            {userHasCart ? (
-                                <Badge color="red">
-                                    <button onClick={() => setShowCart(prev => !prev)}>
-                                        <FaShoppingCart className={"text-2xl " + (!user && 'cursor-not-allowed')}/>
-                                    </button>
-                                </Badge>
-                            ) : (
-                                <button onClick={() => setShowCart(prev => !prev)}>
-                                    <FaShoppingCart className={"text-2xl " + (!user && 'cursor-not-allowed')}/>
-                                </button>
+
+                            {user && (
+                                <div>
+                                    {userHasCart ? (
+                                        <Badge color="red">
+                                            <button
+                                                onClick={() => [setShowCart(prev => !prev), setShowCategories(false)]}>
+                                                <FaShoppingCart
+                                                    className={"text-2xl " + (!user && 'cursor-not-allowed')}/>
+                                            </button>
+                                        </Badge>
+                                    ) : (
+                                        <button onClick={() => [setShowCart(prev => !prev), setShowCategories(false)]}>
+                                            <FaShoppingCart className={"text-2xl " + (!user && 'cursor-not-allowed')}/>
+                                        </button>
+                                    )}
+                                </div>
                             )}
 
                             <div className="ms-4">
                                 {user ? (
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <button type="button" className="">
+                                            <button type="button" className=""
+                                                    onClick={() => [setShowCategories(false), setShowCart(false)]}>
                                                 <FaRegUser className="text-xl inline-block"/>
                                             </button>
                                         </Dropdown.Trigger>
@@ -72,7 +81,7 @@ export default function PageLayout({children}) {
                                 ) : (
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <button type="button" className="">
+                                            <button type="button" className="" onClick={() => [setShowCategories(false), setShowCart(false)]}>
                                                 <FaRegUser className="text-xl inline-block"/>
                                             </button>
                                         </Dropdown.Trigger>
@@ -120,7 +129,7 @@ export default function PageLayout({children}) {
                     >
                         <div className='absolute z-30 mt-2 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'>
                             <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
-                                <Cart/>
+                                <Cart setShowCart={setShowCart}/>
                             </div>
                         </div>
                     </Transition>

@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\OrderItemFeedback;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OrderItemFeedback>
+ * @extends Factory<OrderItemFeedback>
  */
 class OrderItemFeedbackFactory extends Factory
 {

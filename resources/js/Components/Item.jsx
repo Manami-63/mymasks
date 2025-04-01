@@ -1,19 +1,25 @@
-import { CiImageOff } from "react-icons/ci";
+import {CiImageOff} from "react-icons/ci";
 import {Link} from "@inertiajs/react";
+import {useEffect, useState} from "react";
 
 const Item = ({item}) => {
 
     const appUrl = import.meta.env.VITE_APP_URL
-    let hasImage = false
-    let imageUrl = ''
+    const [imageUrl, setImageUrl] = useState('')
+    const [hasImage, setHasImage] = useState(false)
 
-    if (item.image !== null) {
-        imageUrl = appUrl + '/storage/images/' + item.image
-        hasImage = true
-    }
+
+    useEffect(() => {
+        if (item.image !== null) {
+            setImageUrl(appUrl + '/storage/images/' + item.image)
+            setHasImage(true)
+        }
+    }, []);
+
 
     return (
-        <Link href={route('item', item.id)} className="bg-mm-pink p-4 shadow-md shadow-mm-brown rounded-lg hover:opacity-70">
+        <Link href={route('item', item.id)}
+              className="bg-mm-pink p-4 shadow-md shadow-mm-brown rounded-lg hover:opacity-70">
 
             {hasImage ? (
                 <div className="w-full aspect-square">
@@ -23,7 +29,7 @@ const Item = ({item}) => {
                 </div>
             ) : (
                 <div className="w-full aspect-square bg-mm-cream grid place-items-center">
-                    <CiImageOff className="text-8xl" />
+                    <CiImageOff className="text-8xl"/>
                 </div>
             )}
 
