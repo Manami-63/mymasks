@@ -23,7 +23,7 @@ const ItemDetails = ({itemId}) => {
 
 
     useEffect(() => {
-        fetchItem()
+        getItem()
     }, [itemId])
 
     useEffect(() => {
@@ -58,10 +58,10 @@ const ItemDetails = ({itemId}) => {
 
     const cartAdded = () => {
         reward()
-        fetchItem()
+        getItem()
     }
 
-    const fetchItem = async () => {
+    const getItem = async () => {
 
         const apiUrlToGetItem = `/api/items/${itemId}`;
         try {

@@ -53,12 +53,7 @@ const Cart = ({setShowCart}) => {
     }, [cartItems])
 
 
-    const finishUpOrdering = () => {
-        setSending(false)
-        setShowMessage(true)
-    }
-
-    const sendOrder = async () => {
+    const createOrder = async () => {
         const apiUrl = `/api/orders`
 
         try {
@@ -68,7 +63,7 @@ const Cart = ({setShowCart}) => {
 
                 cartItems.map((cartItem, i, num) => {
 
-                    sendOrderItems(createdOrder.id, cartItem)
+                    createOrderItems(createdOrder.id, cartItem)
 
                     if (i + 1 === num.length) {
                         updateOrderStatus(createdOrder.id)
@@ -80,7 +75,7 @@ const Cart = ({setShowCart}) => {
         }
     }
 
-    const sendOrderItems = async (orderId, cartItem) => {
+    const createOrderItems = async (orderId, cartItem) => {
         const apiUrl = `/api/order-items`
 
         if (cartItem.quantity > 0) {
@@ -97,9 +92,14 @@ const Cart = ({setShowCart}) => {
         }
     }
 
+    const finishOrdering = () => {
+        setSending(false)
+        setShowMessage(true)
+    }
+
     const startOrdering = () => {
         setSending(true)
-        sendOrder()
+        createOrder()
     }
 
     const updateOrderStatus = async (orderId) => {
@@ -110,7 +110,7 @@ const Cart = ({setShowCart}) => {
             if (res.data.responseCode === 200) {
 
                 setTimeout(
-                    finishUpOrdering, 2000
+                    finishOrdering, 2000
                 )
                 setTimeout(
                     reward,

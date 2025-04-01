@@ -12,7 +12,7 @@ const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink
 
 
     useEffect(() => {
-        const fetchItems = async () => {
+        const getItems = async () => {
             const itemLimit = isTop ? 'limit=3' : ''
             let itemOrder = ''
 
@@ -34,7 +34,7 @@ const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink
                 setLoading(false)
             }
         }
-        fetchItems()
+        getItems()
     }, [])
 
 

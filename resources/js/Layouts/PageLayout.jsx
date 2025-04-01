@@ -36,7 +36,7 @@ export default function PageLayout({children}) {
                                 <ApplicationLogo className="h-12 w-auto sm:h-14"></ApplicationLogo>
                             </Link>
                         </div>
-                        <div className="hidden sm:ms-6 sm:flex sm:items-center justify-end items-center">
+                        <div className="hidden sm:ms-6 sm:flex justify-end items-start">
 
                             {user && (
                                 <div>
