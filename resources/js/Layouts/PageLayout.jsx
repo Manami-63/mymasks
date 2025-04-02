@@ -23,9 +23,9 @@ export default function PageLayout({children}) {
         <div className="relative flex min-h-screen items-center justify-center flex-col">
 
             <div className="w-full fixed top-0 shadow-xl shadow-mm-pink py-2 z-50 bg-mm-light-pink-opacity">
-                <div className="px-6 sm:max-w-5xl mx-auto relative">
-                    <div className=" grid grid-cols-3 items-center">
-                        <div className="hidden sm:flex sm:items-center justify-start items-center">
+                <div className="px-2 md:px-6 sm:max-w-5xl mx-auto relative">
+                    <div className="grid grid-cols-3 items-center">
+                        <div className="sm:flex sm:items-center justify-start items-center">
                             <button type="button" className=""
                                     onClick={() => [setShowCategories(prev => !prev), setShowCart(false)]}>
                                     <BiSolidCategory className="text-3xl inline-block"/>
@@ -36,7 +36,7 @@ export default function PageLayout({children}) {
                                 <ApplicationLogo className="h-12 w-auto sm:h-14"></ApplicationLogo>
                             </Link>
                         </div>
-                        <div className="hidden sm:ms-6 sm:flex justify-end items-start">
+                        <div className="sm:ms-6 flex justify-end items-start">
 
                             {user && (
                                 <div>
@@ -110,7 +110,7 @@ export default function PageLayout({children}) {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <div className='absolute z-30 mt-2 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'
+                        <div className='absolute z-30 mt-4 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'
                             onClick={() => setShowCategories(false)}>
                             <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-white-opacity'>
                                 <CategoryNav setShowCategories={setShowCategories}/>
@@ -127,8 +127,8 @@ export default function PageLayout({children}) {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <div className='absolute z-30 mt-2 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'>
-                            <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
+                        <div className='absolute z-30 mt-4 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'>
+                            <div className='w-3/4 sm:w-full mx-auto rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
                                 <Cart setShowCart={setShowCart}/>
                             </div>
                         </div>

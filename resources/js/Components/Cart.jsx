@@ -124,7 +124,7 @@ const Cart = ({setShowCart}) => {
 
 
     return (
-        <div className="px-12 py-24">
+        <div className="py-8 px-4 sm:px-12 sm:py-24">
             {showMessage ? (
                 <div className="text-center ">
                     <div className="text-6xl font-bold text-mm-pink">
