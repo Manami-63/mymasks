@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/api')->group(function () {
     Route::resource('/categories', ApiCategoriesController::class);
     Route::resource('/items', ApiItemsController::class);
+    Route::get('/order-item-feedbacks', [ApiOrderItemFeedbacksController::class, 'index']);
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::resource('/cart-items', ApiCartItemsController::class);
-        Route::resource('/order-item-feedbacks', ApiOrderItemFeedbacksController::class);
+        Route::post('/order-item-feedbacks', [ApiOrderItemFeedbacksController::class, 'store']);
         Route::resource('/order-items', ApiOrderItemsController::class);
         Route::resource('/orders', ApiOrdersController::class);
         Route::resource('/user-likes', ApiUserLikesController::class);

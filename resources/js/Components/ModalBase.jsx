@@ -9,7 +9,7 @@ const ModalBase = ({open, setOpenModal, modalContent}) => {
                 isOpen={open}
                 onRequestClose={() => setOpenModal(false)}
                 closeTimeoutMS={500}
-                className="absolute w-1/2 z-[100] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-mm-light-pink p-4 rounded shadow-md shadow-mm-pink"
+                className="absolute w-5/6 sm:w-1/2 z-[100] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-mm-light-pink p-4 rounded shadow-md shadow-mm-pink"
                 overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-[90]"
             >
                 <button className="w-full flex justify-end" onClick={() => setOpenModal(false)}>

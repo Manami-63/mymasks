@@ -104,12 +104,12 @@ const Orders = () => {
 
     const modalContent = () => {
         return (
-            <div className="px-12">
+            <div className="sm:px-12">
                 {modalOrder && (
                     <div>
                         <div>
                             <div
-                                className="p-2 border-b border-mm-brown grid grid-cols-4 gap-12 text-sm"
+                                className="p-2 border-b border-mm-brown grid grid-cols-4 gap-2 sm:gap-12 text-xs sm:text-sm"
                                 key={modalOrder.id}>
                                 {modalOrder.item.image ? (
                                     <div className="mx-auto aspect-square">
@@ -120,7 +120,7 @@ const Orders = () => {
                                 ) : (
                                     <div
                                         className="mx-auto aspect-square bg-mm-cream grid place-items-center">
-                                        <CiImageOff className="text-8xl"/>
+                                        <CiImageOff className="text-4xl sm:text-8xl"/>
                                     </div>
                                 )}
                                 <div className="col-span-3">
@@ -184,7 +184,7 @@ const Orders = () => {
                         </div>
                         <div className="py-4 flex justify-end">
                             <PrimaryButton
-                                className="relative w-full max-w-[250px] flex items-center justify-center"
+                                className="relative w-full sm:max-w-[250px] flex items-center justify-center"
                                 disabled={sending}
                                 onClick={() => createFeedback()}
                             >
@@ -221,7 +221,7 @@ const Orders = () => {
                         {(orders && orders.length > 0) ? (
                             <div>
                                 {orders.map((order) => (
-                                    <div className="py-4 border-b-2 border-mm-brown grid grid-cols-4 gap-4"
+                                    <div className="py-4 border-b-2 border-mm-brown grid sm:grid-cols-4 gap-4"
                                          key={order.id}>
                                         <div className="">
                                             <div>
@@ -230,7 +230,7 @@ const Orders = () => {
                                             <div className="text-sm">
                                                 Order #{order.id}
                                             </div>
-                                            <div className="mt-8">
+                                            <div className="mt-2 sm:mt-8">
                                                 {order.order_items.length} items
                                             </div>
                                             <div className="font-bold">
@@ -241,7 +241,7 @@ const Orders = () => {
                                             )}
 
                                         </div>
-                                        <div className="col-span-3">
+                                        <div className="md:col-span-3">
                                             {order.order_items.map((orderItem) => (
                                                 <div
                                                     className="p-2 border-b border-mm-brown grid grid-cols-4 gap-12 text-sm"

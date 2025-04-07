@@ -26,7 +26,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="pt-16">
-                    <ListItems isTop="true" title="waiting for your feedback" order="feedback" viewMoreItemsLink="feedback"/>
+                    <ListItems isTop="true" title="feedback please" order="feedback" viewMoreItemsLink="feedback"/>
                 </div>
             </div>
         </div>

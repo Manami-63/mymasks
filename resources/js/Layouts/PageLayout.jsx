@@ -28,8 +28,8 @@ export default function PageLayout({children}) {
                         <div className="sm:flex sm:items-center justify-start items-center">
                             <button type="button" className=""
                                     onClick={() => [setShowCategories(prev => !prev), setShowCart(false)]}>
-                                    <BiSolidCategory className="text-3xl inline-block"/>
-                                </button>
+                                <BiSolidCategory className="text-3xl inline-block"/>
+                            </button>
                         </div>
                         <div className="flex justify-center">
                             <Link href={route('top')}>
@@ -81,7 +81,8 @@ export default function PageLayout({children}) {
                                 ) : (
                                     <Dropdown>
                                         <Dropdown.Trigger>
-                                            <button type="button" className="" onClick={() => [setShowCategories(false), setShowCart(false)]}>
+                                            <button type="button" className=""
+                                                    onClick={() => [setShowCategories(false), setShowCart(false)]}>
                                                 <FaRegUser className="text-xl inline-block"/>
                                             </button>
                                         </Dropdown.Trigger>
@@ -110,9 +111,11 @@ export default function PageLayout({children}) {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <div className='absolute z-30 mt-4 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'
+                        <div
+                            className='absolute z-30 mt-4 min-h-screen rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'
                             onClick={() => setShowCategories(false)}>
-                            <div className='rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-white-opacity'>
+                            <div
+                                className='w-full sm:w-full min-h-screen mx-auto rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
                                 <CategoryNav setShowCategories={setShowCategories}/>
                             </div>
                         </div>
@@ -127,8 +130,10 @@ export default function PageLayout({children}) {
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <div className='absolute z-30 mt-4 rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'>
-                            <div className='w-3/4 sm:w-full mx-auto rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
+                        <div
+                            className='absolute z-30 mt-4 min-h-screen  rounded-md shadow-lg w-full ltr:origin-top-left rtl:origin-top-right start-0'>
+                            <div
+                                className='w-full sm:w-full min-h-screen mx-auto rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-mm-cream'>
                                 <Cart setShowCart={setShowCart}/>
                             </div>
                         </div>
@@ -136,7 +141,7 @@ export default function PageLayout({children}) {
                 </div>
             </div>
 
-            <main className="absolute top-20 w-full max-w-2xl px-6 lg:max-w-5xl" id="myapp" >
+            <main className="absolute top-20 w-full max-w-2xl px-6 pb-20 lg:max-w-5xl" id="myapp">
                 {children}
             </main>
         </div>

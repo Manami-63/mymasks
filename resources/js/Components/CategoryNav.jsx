@@ -28,8 +28,8 @@ const CategoryNav = ({setShowCategories}) => {
 
 
     return (
-        <div className="p-12">
-            <div className='grid grid-cols-8 gap-8 text-sm'>
+        <div className="p-8 sm:p-12">
+            <div className='grid grid-cols-3 sm:grid-cols-8 gap-4 sm:gap-8 text-sm'>
                 {categories.length > 0 && categories.map((category) => (
                     <Link href={route('items', { orderBy: 'all', category: category.id})}
                           onClick={() => setShowCategories(false)}
@@ -42,7 +42,7 @@ const CategoryNav = ({setShowCategories}) => {
 
                 ))}
             </div>
-            <div className='mt-8 grid grid-cols-8 gap-8 text-sm'>
+            <div className='mt-8 grid grid-cols-3 sm:grid-cols-8 gap-4 sm:gap-8 text-sm'>
                 {showingItemsOptions.map((option) => (
                     <Link href={route('items', {orderBy: option})}
                           onClick={() => setShowCategories(false)}

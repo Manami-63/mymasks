@@ -52,16 +52,16 @@ const ItemsPage = ({orderBy, category, categories}) => {
 
             <Head title="My Masks"/>
 
-            <div className="mt-20">
-                <div className='flex gap-4 flex-wrap'>
+            <div className="mt-12 sm:mt-20">
+                <div className='flex gap-2 sm:gap-4 flex-wrap'>
                     {categories.length > 0 && categories.map((category) => (
                         <button key={category.id} onClick={() => toggleCategory(category.id)}
-                                className={"px-4 font-bold capitalize text-sm rounded-lg" + (selectedCategories && selectedCategories.includes(category.id) ? ' bg-mm-dark-brown text-mm-cream' : ' bg-mm-pink ')}>
+                                className={"px-2 sm:px-4 font-bold capitalize text-sm rounded-lg" + (selectedCategories && selectedCategories.includes(category.id) ? ' bg-mm-dark-brown text-mm-cream' : ' bg-mm-pink ')}>
                             {category.name}
                         </button>
                     ))}
                 </div>
-                <div className='mt-4 flex gap-4 flex-wrap'>
+                <div className='mt-4 flex gap-2 sm:gap-4 flex-wrap'>
                     {showingItemsOptions.map((option) => (
                         <Link href={selectedCategories.length ? route('items', {
                             orderBy: option,

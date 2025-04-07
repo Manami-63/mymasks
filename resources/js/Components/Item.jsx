@@ -19,7 +19,7 @@ const Item = ({item}) => {
 
     return (
         <Link href={route('item', item.id)}
-              className="bg-mm-pink p-4 shadow-md shadow-mm-brown rounded-lg hover:opacity-70">
+              className="bg-mm-pink p-2 sm:p-4 shadow-md shadow-mm-brown rounded-lg hover:opacity-70">
 
             {hasImage ? (
                 <div className="w-full aspect-square">
@@ -29,17 +29,17 @@ const Item = ({item}) => {
                 </div>
             ) : (
                 <div className="w-full aspect-square bg-mm-cream grid place-items-center">
-                    <CiImageOff className="text-8xl"/>
+                    <CiImageOff className="text-6xl sm:text-8xl"/>
                 </div>
             )}
 
-            <div className="font-bold text-lg truncate">
+            <div className="font-bold sm:text-lg truncate">
                 {item.name}
             </div>
             <div className="text-sm truncate">
                 {item.brand.name}
             </div>
-            <div className="font-bold text-sm text-right">
+            <div className="mt-4 font-bold text-sm text-right">
                 ${item.price} / {item.sheet_per_packet} {item.sheet_per_packet > 1 ? ('sheets') : ('sheet')}
             </div>
             <div className="text-xs text-right">

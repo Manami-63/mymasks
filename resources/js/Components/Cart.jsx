@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {CiImageOff} from "react-icons/ci";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
 import Spinner from "@/Components/Spinner.jsx";
 import {useReward} from 'react-rewards';
 import {Link} from "@inertiajs/react";
+import {IoIosClose} from "react-icons/io";
 
 const Cart = ({setShowCart}) => {
 
@@ -124,7 +125,12 @@ const Cart = ({setShowCart}) => {
 
 
     return (
-        <div className="py-8 px-4 sm:px-12 sm:py-24">
+        <div className="p-4 sm:px-12 sm:pt-4">
+
+            <button className="w-full flex justify-end mb-4" onClick={() => setShowCart(false)}>
+                <IoIosClose className="text-4xl"/>
+            </button>
+
             {showMessage ? (
                 <div className="text-center ">
                     <div className="text-6xl font-bold text-mm-pink">
@@ -147,22 +153,22 @@ const Cart = ({setShowCart}) => {
                     {(cartItems && cartItems.length > 0) ? (
                         <div>
                             {cartItems.map((cartItem) => (
-                                <div className="p-2 border-b border-mm-brown grid grid-cols-4 gap-12 text-sm"
+                                <div className="p-2 border-b border-mm-brown grid grid-cols-4 gap-4 sm:gap-12 text-sm"
                                      key={cartItem.id}>
                                     {cartItem.item.image ? (
-                                        <div className="w-2/3 mx-auto aspect-square">
+                                        <div className="w-full sm:w-2/3 mx-auto aspect-square">
                                             <div className="bg-center bg-cover bg-no-repeat h-full"
                                                  style={{backgroundImage: `url(${appUrl + '/storage/images/' + cartItem.item.image})`}}>
                                             </div>
                                         </div>
                                     ) : (
                                         <div
-                                            className="w-2/3 mx-auto aspect-square bg-mm-cream grid place-items-center">
+                                            className="w-full sm:w-2/3 mx-auto aspect-square bg-mm-cream grid place-items-center">
                                             <CiImageOff className="text-8xl"/>
                                         </div>
                                     )}
-                                    <div className="col-span-2">
-                                        <div className="text-base font-bold">
+                                    <div className="col-span-3 sm:col-span-2">
+                                        <div className="text-base font-bold truncate">
                                             {cartItem.item.name}
                                             <span id="rewardId"/>
                                         </div>
@@ -173,40 +179,44 @@ const Cart = ({setShowCart}) => {
                                             ${cartItem.item.price} per pack
                                         </div>
                                     </div>
-                                    <div>
-                                        <div className="text-sm">
-                                            Quantity:
-                                        </div>
-                                        <input
-                                            type='number'
-                                            max={cartItem.item.stock}
-                                            min={0}
-                                            id='quantity'
-                                            name='quantity'
-                                            className='bg-mm-cream border-t-0 border-r-0 border-l-0 focus:border-mm-pink'
-                                            required
-                                            value={cartItem.quantity}
-                                            onChange={(e) => {
-                                                const newQuantity = Number(e.target.value);
-                                                setCartItems((prevCartItems) =>
-                                                    prevCartItems.map((item) =>
-                                                        item.id === cartItem.id ? {
-                                                            ...item,
-                                                            quantity: newQuantity
-                                                        } : item
-                                                    )
-                                                );
-                                            }}
-                                        />
-                                        <div className="font-bold">
-                                            Total: ${cartItem.quantity * cartItem.item.price}
+                                    <div className="col-span-4 sm:col-span-1">
+                                        <div className="">
+                                            <div className="flex sm:flex-col items-center sm:items-end justify-end">
+                                                <div className="text-sm">
+                                                    Quantity:
+                                                </div>
+                                                <input
+                                                    type='number'
+                                                    max={cartItem.item.stock}
+                                                    min={0}
+                                                    id='quantity'
+                                                    name='quantity'
+                                                    className='bg-mm-cream border-t-0 border-r-0 border-l-0 focus:border-mm-pink'
+                                                    required
+                                                    value={cartItem.quantity}
+                                                    onChange={(e) => {
+                                                        const newQuantity = Number(e.target.value);
+                                                        setCartItems((prevCartItems) =>
+                                                            prevCartItems.map((item) =>
+                                                                item.id === cartItem.id ? {
+                                                                    ...item,
+                                                                    quantity: newQuantity
+                                                                } : item
+                                                            )
+                                                        );
+                                                    }}
+                                                />
+                                            </div>
+                                            <div className="font-bold mt-2 flex justify-end">
+                                                Total: ${cartItem.quantity * cartItem.item.price}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                             <div className="mt-4 flex justify-end">
                                 <PrimaryButton
-                                    className="relative w-full max-w-[250px] flex items-center justify-center"
+                                    className="relative w-3/4 sm:w-full max-w-[250px] flex items-center justify-center"
                                     disabled={sending}
                                     onClick={() => startOrdering()}
                                 >

@@ -13,7 +13,7 @@ const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink
 
     useEffect(() => {
         const getItems = async () => {
-            const itemLimit = isTop ? 'limit=3' : ''
+            const itemLimit = isTop ? 'limit=4' : ''
             let itemOrder = ''
 
             if (order !== null) {
@@ -50,21 +50,21 @@ const ListItems = ({isTop = false, title = null, order = null, viewMoreItemsLink
                                 {title &&
                                     <div className="flex">
                                         <div className="flex justify-items-start">
-                                            <LiaStarSolid className='text-yellow-400 text-base mb-4'/>
-                                            <LiaStarSolid className='text-yellow-400 text-lg mb-4'/>
-                                            <LiaStarSolid className='text-yellow-400 text-xl mb-4'/>
-                                            <div className="uppercase text-xl font-bold px-2">
+                                            <LiaStarSolid className='text-mm-pink text-base mb-4'/>
+                                            <LiaStarSolid className='text-mm-pink text-lg mb-4'/>
+                                            <LiaStarSolid className='text-mm-pink text-xl mb-4'/>
+                                            <div className="uppercase text-lg sm:text-xl font-bold px-2">
                                                 {title}
                                             </div>
-                                            <LiaStarSolid className='text-yellow-400 text-xl mb-4'/>
-                                            <LiaStarSolid className='text-yellow-400 text-lg mb-4'/>
-                                            <LiaStarSolid className='text-yellow-400 text-base mb-4'/>
+                                            <LiaStarSolid className='text-mm-pink text-xl mb-4'/>
+                                            <LiaStarSolid className='text-mm-pink text-lg mb-4'/>
+                                            <LiaStarSolid className='text-mm-pink text-base mb-4'/>
                                         </div>
                                     </div>
                                 }
 
                                 <div className="mt-4">
-                                    <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
+                                    <div className='grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-12'>
                                         {items.map((item) => (
                                             <Item key={item.id} item={item}/>
                                         ))}

@@ -17,7 +17,7 @@ const ItemDetails = ({itemId}) => {
     const [item, setItem] = useState(null)
     const [loading, setLoading] = useState(true)
     const [quantity, setQuantity] = useState(0)
-    const {reward} = useReward('rewardId', 'confetti', {'elementCount': 10, startVelocity: 15})
+    const {reward} = useReward('rewardId', 'confetti')
     const user = usePage().props.auth.user;
     const [userLike, setUserLike] = useState(null)
 
