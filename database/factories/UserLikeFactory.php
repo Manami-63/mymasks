@@ -30,7 +30,7 @@ class UserLikeFactory extends Factory
         $items = Item::all();
 
         if ($items->isEmpty()) {
-            $item = 'special';
+            $item = Item::factory()->create();
         } else {
             $item = $items->random();
         }

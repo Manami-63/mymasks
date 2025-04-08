@@ -30,7 +30,7 @@ class ItemCategoryFactory extends Factory
         $categories = Category::all();
 
         if ($categories->isEmpty()) {
-            $category = 'special';
+            $category = Category::factory()->create(['name' => 'special']);
         } else {
             $category = $categories->random();
         }

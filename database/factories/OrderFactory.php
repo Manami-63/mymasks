@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Enums\OrderStatus;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
+ * @extends Factory<Order>
  */
 class OrderFactory extends Factory
 {
@@ -16,8 +19,17 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
+        $users = User::all();
+
+        if ($users->isEmpty()) {
+            $user = User::factory()->create();
+        } else {
+            $user = $users->random();
+        }
+
         return [
-            //
+            "user_id" => $user->id,
+            "status" =>  OrderStatus::PLACED
         ];
     }
 }

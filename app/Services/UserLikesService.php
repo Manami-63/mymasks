@@ -6,9 +6,15 @@ namespace App\Services;
 
 use App\Models\Item;
 use App\Models\UserLike;
+use Feature\Services\UserLikesServiceTest;
 
 class UserLikesService
 {
+    /**
+     * @param UserLike $userLike
+     * @return void
+     * @see UserLikesServiceTest::updateNumLikes()
+     */
     public static function updateNumLikes(UserLike $userLike): void
     {
         $item = Item::find($userLike->item_id);

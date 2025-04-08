@@ -17,9 +17,9 @@ Route::prefix('/api')->group(function () {
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::resource('/cart-items', ApiCartItemsController::class);
-        Route::post('/order-item-feedbacks', [ApiOrderItemFeedbacksController::class, 'store']);
         Route::resource('/order-items', ApiOrderItemsController::class);
         Route::resource('/orders', ApiOrdersController::class);
         Route::resource('/user-likes', ApiUserLikesController::class);
+        Route::post('/order-item-feedbacks', [ApiOrderItemFeedbacksController::class, 'store']);
     });
 });

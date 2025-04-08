@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Item;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\OrderItemFeedback;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,8 +20,19 @@ class OrderItemFeedbackFactory extends Factory
      */
     public function definition(): array
     {
+        $orderItems = OrderItem::all();
+
+        if ($orderItems->isEmpty()) {
+            $orderItem = OrderItem::factory()->create();
+        } else {
+            $orderItem = $orderItems->random();
+        }
+
         return [
-            //
+            "order_item_id" => $orderItem->id,
+            "name" => $this->faker->name(),
+            "feedback" => $this->faker->text(),
+            "rating" => $this->faker->numberBetween(1,5)
         ];
     }
 }
